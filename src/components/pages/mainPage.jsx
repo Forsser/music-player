@@ -1,14 +1,14 @@
 import React from "react";
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import "../../styles/main-page.scss";
 import "../../styles/home.scss";
 import { Header } from "../header/header";
 import { SecondAside } from "../aside/secondAside";
 import { Home } from "./home";
-import { Artist } from "./artist";
 import { Albums } from "./albums";
 import { Podcast } from "./podcast";
 import { Song } from "./song";
+import { ArtistById } from "./artist-by-id";
 
 export const MainPage = () => {
   return (
@@ -18,7 +18,7 @@ export const MainPage = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/song" element={<Song />} />
-          <Route path="/artist" element={<Artist />} />
+          <Route path="/artist/:id" element={<ArtistById />} />
           <Route path="/albums" element={<Albums />} />
           <Route path="/podcast" element={<Podcast />} />
         </Routes>

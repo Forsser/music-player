@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 import "../../styles/aside.scss";
 import { SVGComponent } from "../svgComponents";
@@ -8,39 +8,34 @@ export const MainAside = () => {
   return (
     <aside className="sidebar">
       <nav className="sidebar__nav-container">
-        <div className="sidebar__nav-svg-container">
+        <NavLink
+          to="/"
+          className="sidebar__nav-svg-container sidebar__nav-item"
+        >
           <SVGComponent icon={"home"} />
-          <NavLink
-            to="/"
-            className="sidebar__nav-item sidebar__nav-item--active"
-          >
-            Home
-          </NavLink>
-        </div>
-        <div className="sidebar__nav-svg-container">
-          <SVGComponent icon={"circle-full"} />
-          <NavLink to="song" className="sidebar__nav-item">
-            Songs
-          </NavLink>
-        </div>
-        <div className="sidebar__nav-svg-container">
-          <SVGComponent icon={"circle-full"} />
-          <NavLink to="artist" className="sidebar__nav-item">
-            Artists
-          </NavLink>
-        </div>
-        <div className="sidebar__nav-svg-container">
-          <SVGComponent icon={"circle"} />
-          <NavLink to="albums" className="sidebar__nav-item">
-            Albums
-          </NavLink>
-        </div>
-        <div className="sidebar__nav-svg-container">
-          <SVGComponent icon={"circle-full"} />
-          <NavLink to="podcast" className="sidebar__nav-item">
-            Podcast
-          </NavLink>
-        </div>
+          Home
+        </NavLink>
+        <NavLink
+          to="song"
+          className="sidebar__nav-svg-container sidebar__nav-item"
+        >
+          <SVGComponent icon={"songs"} />
+          Songs
+        </NavLink>
+        <NavLink
+          to="albums"
+          className="sidebar__nav-svg-container sidebar__nav-item"
+        >
+          <SVGComponent icon={"albums"} />
+          Albums
+        </NavLink>
+        <NavLink
+          to="podcast"
+          className="sidebar__nav-svg-container sidebar__nav-item"
+        >
+          <SVGComponent icon={"podcast"} />
+          Podcast
+        </NavLink>
       </nav>
       <span className="sidebar__nav-line"></span>
       <section className="collections">

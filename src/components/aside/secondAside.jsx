@@ -1,14 +1,49 @@
 import React from "react";
+import "../../styles/second-asaid.scss";
+import { getSongById } from "../../redux/actions/songActions";
+
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
 export const SecondAside = () => {
+  const currentTrackId = useSelector(
+    (state) => state.allMusic.currentTrack.trackId
+  );
+  const currentTrackData = useSelector(
+    (state) => state.allMusic.currentTrack.trackData
+  );
+
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getSongById(currentTrackId));
+  }, [currentTrackId]);
   return (
     <aside className="now-playing">
       <section className="current-song">
-        <img src="path_to_now_playing_image" alt="Now Playing" />
-        <h3 className="song-title">Cry</h3>
-        <p className="artist-name">Cigarettes After Sex</p>
+        <h3 className="song-title">
+          <div className="now playing" id="music">
+            <span className="bar n1"></span>
+            <span className="bar n2"></span>
+            <span className="bar n3"></span>
+            <span className="bar n4"></span>
+            <span className="bar n5"></span>
+            <span className="bar n6"></span>
+            <span className="bar n7"></span>
+            <span className="bar n8"></span>
+            Now Playing
+          </div>
+        </h3>
+        {currentTrackData ? (
+          <div>
+            <img src={currentTrackData.album.images[1].url} alt="" />
+            <p className="artist-name">{currentTrackData.artists[0].name}</p>
+            <p className="artist-name">{currentTrackData.name}</p>
+            <p>Album: {currentTrackData.album.name}</p>
+          </div>
+        ) : null}
       </section>
-      <section className="queue">
+      {/*       <section className="queue">
         <h2>Queue</h2>
         <ul>
           <li className="queue-item">
@@ -33,10 +68,9 @@ export const SecondAside = () => {
               <div className="song-title">Apocalypse</div>
               <div className="artist-name">Cigarettes After Sex</div>
             </div>
-            <button className="play-button">▶</button>
           </li>
         </ul>
-      </section>
+      </section> */}
     </aside>
   );
 };
