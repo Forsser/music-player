@@ -1,13 +1,247 @@
-body {
+/* /* Основні стилі для всієї сторінки */
+@import url(./normalize.css);
+
+/* .wrapper {
+  font-family: "Arial", sans-serif;
+  background-color: rgb(32, 32, 32);
+  color: rgb(255, 255, 255);
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  min-height: 100%;
+  width: 100%;
+}
+.main-continer {
+  display: flex;
+  justify-content: space-between;
+  min-height: 400px;
+} */
+
+/* Стилі для бокової навігаційної панелі */
+/* .sidebar {
+  width: 250px;
+  background-color: #2e2e2e;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+.sidebar .logo {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.sidebar nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar nav a {
+  text-decoration: none;
+  color: #b3b3b3;
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.sidebar nav a:hover {
+  color: #ffffff;
+}
+
+.sidebar .collections {
+  margin-top: 30px;
+}
+
+.sidebar .collections .collection-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.sidebar .collections .collection-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 10px;
+} */
+
+/* Стилі для основного контенту */
+/* .main-content {
+  flex: 1;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.main-content .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.main-content .header .welcome {
+  font-size: 22px;
+}
+
+.main-content .header .search-bar {
+  display: flex;
+  align-items: center;
+  background-color: #3a3a3a;
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+.main-content .header .search-bar input {
+  border: none;
+  background: none;
+  color: #ffffff;
+  outline: none;
+  padding: 5px;
+  margin-left: 10px;
+}
+
+.main-content .header .user-profile img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.main-content .section {
+  margin-bottom: 20px;
+}
+
+.main-content .section .section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  font-size: 18px;
+}
+
+.main-content .section .section-content {
+  display: flex;
+  overflow-x: auto;
+}
+
+.main-content .section .section-content .card {
+  background-color: #3a3a3a;
+  padding: 10px;
+  border-radius: 10px;
+  margin-right: 10px;
+  width: 150px;
+  height: 100px;
+  text-align: center;
+}
+
+.main-content .section .section-content .card img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.main-content .section .section-content .artist-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 10px;
+  width: 100px;
+}
+
+.main-content .section .section-content .artist-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-bottom: 10px;
+} */
+
+/* Стилі для панелі "Now Playing" */
+/* .now-playing {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 100%;
+  overflow: hidden;
+  background-color: #2e2e2e;
+  padding: 20px;
+  margin-left: auto;
+}
+
+.now-playing .current-song {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.now-playing .current-song img {
+  width: 100%;
+  border-radius: 10px;
+  margin-bottom: 10px;
+}
+
+.now-playing .current-song .song-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.now-playing .current-song .artist-name {
+  font-size: 16px;
+  color: #b3b3b3;
+}
+
+.now-playing .queue {
+  display: flex;
+  flex-direction: column;
+}
+
+.now-playing .queue .queue-item {
+  display: flex;
+  align-items: center;
+  margin: 10px 0;
+}
+
+.now-playing .queue .queue-item img {
+  width: 40px;
+  height: 40px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.now-playing .queue .queue-item .song-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.now-playing .queue .queue-item .song-info .song-title {
+  font-size: 14px;
+}
+
+.now-playing .queue .queue-item .song-info .artist-name {
+  font-size: 12px;
+  color: #b3b3b3;
+}
+
+.now-playing .queue .queue-item .play-button {
+  margin-left: auto;
+  background-color: transparent;
+  border: none;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.now-playing .queue .queue-item .play-button:hover {
+  color: #1db954;
+} */
+.wrapper {
+  font-family: "Arial", sans-serif;
+  font-size: 20px;
+  background-color: rgb(83, 81, 81);
+  color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: rows;
+  padding: 20px;
 }
