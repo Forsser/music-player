@@ -7,7 +7,7 @@
 .section-content {
   display: flex;
   justify-content: space-between;
-  height: 260px;
+  max-height: 360px;
   align-items: stretch;
   padding: 0px 10px;
 }
@@ -19,42 +19,30 @@
   position: relative;
   border-radius: 15px;
   overflow: hidden;
-
   width: 210px;
-
-  transition: all 0.2s linear;
+  padding: 5px;
+  transition: all 0.1s linear;
   &:hover {
     cursor: pointer;
-  }
-  &:hover .card__text {
-    background: rgba(155, 155, 156, 0.253);
-    backdrop-filter: blur(5px);
+    background: #232323;
   }
   &__img {
     width: 100%;
-    height: 230px;
+    height: 200px;
     object-fit: cover;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-radius: 15px;
   }
   &__text {
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
     width: 100%;
     padding: 5px 5px;
     font-size: 14px;
     display: flex;
     flex-direction: column;
 
-    background: rgba(52, 52, 52, 0.784);
-    backdrop-filter: blur(10px);
-
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 
     &--hover {
-      transition: color 0.1s linear;
       &:hover {
         color: rgb(255, 174, 0);
       }
@@ -78,7 +66,8 @@
     transform: scale(1.1);
   }
   &__img {
-    height: 140px;
+    height: 150px;
+    width: 150px;
     object-fit: cover;
     border-radius: 50%;
     transition: all 0.2s;

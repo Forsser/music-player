@@ -159,10 +159,10 @@ a {
   justify-content: space-between;
 }
 .categories-item {
-  width: 140px;
+  width: 160px;
   text-align: center;
-  overflow: hidden;
   border-radius: 15px;
+  padding: 5px;
   font-size: 16px;
   color: #e2e2e2fa;
   border-bottom: 1px solid #e2e2e200;
@@ -170,8 +170,10 @@ a {
 
   &:hover {
     cursor: pointer;
-    color: #72df50;
-    border-bottom: 1px solid #e2e2e2fa;
-    transform: scale(1.05);
+    background: #6b6a6a;
+  }
+  img {
+    width: 100%;
+    border-radius: 15px;
   }
 }
