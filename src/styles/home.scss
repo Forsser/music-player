@@ -18,8 +18,12 @@
 .card {
   position: relative;
   border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   overflow: hidden;
   width: 210px;
+  height: 300px;
   padding: 5px;
   transition: all 0.1s linear;
   &:hover {
@@ -38,19 +42,28 @@
     font-size: 14px;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
 
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
 
     &--hover {
+      color: #a7a6a6;
       &:hover {
         color: rgb(255, 174, 0);
+        text-decoration: underline;
       }
+    }
+
+    &__name {
+      margin: 0px;
     }
   }
   &__text__item {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    flex-grow: 1;
   }
 
   &__button {
@@ -71,5 +84,49 @@
     object-fit: cover;
     border-radius: 50%;
     transition: all 0.2s;
+  }
+}
+.track-list {
+  &__items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  &__item {
+    margin: 20px 0px;
+    width: 200px;
+    padding: 5px;
+    border-radius: 15px;
+    &:hover {
+      cursor: pointer;
+      background: #232323;
+    }
+    .track__image {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+      border-radius: 15px;
+    }
+    .track__info {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      gap: 7px;
+
+      font-size: 14px;
+
+      .track__artist {
+        color: #a7a6a6;
+        margin: 5px 0px;
+        padding: 0px 0px 5px 0px;
+        &:hover {
+          color: rgb(255, 174, 0);
+          text-decoration: underline;
+        }
+      }
+      .track__name {
+        margin: 5px 0px;
+      }
+    }
   }
 }

@@ -15,7 +15,7 @@ const fetchGeneralPage = async () => {
   return data;
 };
 const fetcSong = async () => {
-  const { data } = await axios.get("http://localhost:3030/api/song");
+  const { data } = await axios.get("http://localhost:3030/api/song/");
 
   return data;
 };

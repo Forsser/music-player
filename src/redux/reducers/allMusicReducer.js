@@ -9,6 +9,7 @@ import { getArtistById } from "../actions/artistsActions.js";
 const generalInitialState = {
   trendingTracks: [],
   popularArtists: [],
+  topSongGlobal: [],
 };
 const songsInitialState = {
   trendingSongTracks: [],
@@ -29,26 +30,9 @@ const setToken = createReducer([], (builder) => {
 
 const generalPages = createReducer(generalInitialState, (builder) => {
   builder.addCase(getSongsfromGeneralPage.fulfilled, (state, action) => {
-    /*     if (state.trendingTracks.length === 0) {
-      return {
-        ...state,
-        trendingTracks: [
-          ...state.trendingTracks,
-          action.payload.trendingTracks,
-        ],
-      };
-    }
-    const allTracks = [
-      ...state.trendingTracks,
-      ...action.payload.trendingTracks,
-    ];
-    const uniqueTracks = allTracks.filter(
-      (track, index, array) =>
-        array.findIndex((t) => t.id === track.id) === index
-    );
-    return { state, trendingTracks: [...uniqueTracks] };*/
     state.trendingTracks = action.payload.trendingTracks;
     state.popularArtists = action.payload.popularArtistsFromMainPage;
+    state.topSongGlobal = action.payload.topSongGlobal;
   });
 });
 

@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fet } from "./allMusicAPI";
+
 import { fetchArtistById } from "./allMusicAPI";
 
 const getArtists = createAsyncThunk(

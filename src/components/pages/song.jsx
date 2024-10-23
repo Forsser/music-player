@@ -20,6 +20,8 @@ export const Song = memo(() => {
   const songCatigories = useSelector(
     (state) => state.allMusic.song.songsCategories
   );
+  console.log(songCatigories);
+
   const previewTrack = trendingTracks.filter((track) => {
     return track.track.preview_url !== null;
   });
@@ -41,6 +43,7 @@ export const Song = memo(() => {
     <div className="section-continer">
       <div className="section-track-wrapper">
         <h2>Trending songs this week</h2>
+        <h3>Song Categories: </h3>
         <table className="trending-songs__table">
           <thead className="trending-songs__thead">
             <tr className="trending-songs__row">
@@ -59,28 +62,28 @@ export const Song = memo(() => {
             </tr>
           </thead>
           <tbody className="trending-songs__tbody">
-            {previewTrack.map((track) => (
+            {previewTrack.map(({ track }) => (
               <tr
                 className={`trending-songs__row ${
-                  currentPlayingTrack === track.track.preview_url
+                  currentPlayingTrack === track.preview_url
                     ? "trending-songs__row--active"
                     : ""
                 }`}
-                key={track.track.id}
+                key={track.id}
               >
                 <td className="trending-songs__cell trending-songs__cell--song">
                   <TrackToggle track={track} />
                 </td>
                 <td className="trending-songs__cell trending-songs__cell--artist">
-                  <Link to={`/artist/${track.track.artists[0].id}`}>
-                    {track.track.artists[0].name}
+                  <Link to={`/artist/${track.artists[0].id}`}>
+                    {track.artists[0].name}
                   </Link>
                 </td>
                 <td className="trending-songs__cell trending-songs__cell--album">
-                  <a href="#">{track.track.album.name}</a>
+                  <a href="#">{track.album.name}</a>
                 </td>
                 <td className="trending-songs__cell trending-songs__cell--time">
-                  {formatDuration(track.track.duration_ms)}
+                  {formatDuration(track.duration_ms)}
                 </td>
               </tr>
             ))}

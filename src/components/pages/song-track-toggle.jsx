@@ -3,7 +3,6 @@ import { useEffect, useState } from "react";
 import playToggleSvg from "../../styles/svg/play-toggle.svg";
 import { playTrack } from "../../redux/actions/allMusicActions.js";
 import { togglePlay } from "../../redux/actions/togglePlay.js";
-import { motion } from "framer-motion";
 
 const TrackToggle = ({ track }) => {
   const dispatch = useDispatch();
@@ -33,23 +32,23 @@ const TrackToggle = ({ track }) => {
       <div className="trending-songs__img-container">
         <img
           className="trending-songs__img"
-          src={track.track.album.images[2].url}
-          alt={track.track.name}
+          src={track.album.images[2].url}
+          alt={track.name}
         />
         <button
           className="song-play-toggle"
           type="button"
           onClick={() =>
             playSong({
-              trackUrl: track.track.preview_url,
-              trackId: track.track.id,
+              trackUrl: track.preview_url,
+              trackId: track.id,
             })
           }
         >
           <svg width="25" height="25" className="song-play-toggle__svg">
             <use
               href={
-                currentPlayingTrack === track.track.preview_url
+                currentPlayingTrack === track.preview_url
                   ? playToggleSvg + (playStates ? "#pause" : "#play")
                   : playToggleSvg + "#play"
               }
@@ -57,7 +56,7 @@ const TrackToggle = ({ track }) => {
           </svg>
         </button>
       </div>
-      <p className="trending-songs__name">{track.track.name}</p>
+      <p className="trending-songs__name">{track.name}</p>
     </div>
   );
 };

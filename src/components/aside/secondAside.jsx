@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 
 export const SecondAside = () => {
+  const dispatch = useDispatch();
   const currentTrackId = useSelector(
     (state) => state.allMusic.currentTrack.trackId
   );
@@ -13,10 +14,10 @@ export const SecondAside = () => {
     (state) => state.allMusic.currentTrack.trackData
   );
 
-  const dispatch = useDispatch();
-
   useEffect(() => {
-    dispatch(getSongById(currentTrackId));
+    if (currentTrackId) {
+      dispatch(getSongById(currentTrackId));
+    }
   }, [currentTrackId]);
   return (
     <aside className="now-playing">

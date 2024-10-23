@@ -6,6 +6,7 @@ const getSongsfromGeneralPage = createAsyncThunk(
 
   async () => {
     const response = await fetchGeneralPage();
+
     return response;
   }
 );

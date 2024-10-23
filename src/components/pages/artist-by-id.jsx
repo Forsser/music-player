@@ -1,17 +1,35 @@
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getArtistById } from "../../redux/actions/artistsActions";
 import "../../styles/artist-by-id.scss";
 import Svg from "../../styles/svg/symbol-defs.svg";
+import { trackToggle } from "../../services/trackToggle";
 
 export const ArtistById = () => {
   const { id } = useParams();
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getArtistById(id));
+  }, [id]);
+
   const { artist, artistTracks } = useSelector(
     (state) => state.allMusic.artist.artistById
   );
-  console.log(artistTracks);
-  const dispatch = useDispatch();
+
+  const artistTracksPrevUrl =
+    artistTracks && artistTracks.tracks
+      ? artistTracks.tracks.filter((track) => track.preview_url)
+      : [];
+
+  const currentPlayingTrack = useSelector(
+    (state) => state.allMusic.currentTrack.trackUrl
+  );
+  const isPlaying = useSelector((state) => state.togglePlay);
+  const [playStates, setPlayStates] = useState(false);
+  let trackUrl = null;
+  let trackId = null;
+
   const formatDuration = (durationMs) => {
     const minutes = Math.floor(durationMs / 60000);
     const seconds = Math.floor((durationMs % 60000) / 1000)
@@ -20,10 +38,6 @@ export const ArtistById = () => {
     return `${minutes}:${seconds}`;
   };
 
-  useEffect(() => {
-    dispatch(getArtistById(id));
-  }, [id]);
-
   if (!artist) {
     return <div>Loading...</div>;
   }
@@ -31,7 +45,7 @@ export const ArtistById = () => {
     <div className="section-continer">
       <div className="artist">
         <div className="artist__header">
-          <div class="artist__image-wrapper">
+          <div className="artist__image-wrapper">
             <img
               src={artist.images[0].url}
               className="artist__image"
@@ -53,30 +67,42 @@ export const ArtistById = () => {
         </div>
         <div className="artist__tracks">
           <ul className="artist__track-list">
-            {artistTracks.tracks.map((track) => (
-              <li className="artist__track-item" key={track.id}>
-                <div className="artist__track">
-                  <img
-                    className="artist__track-images"
-                    src={track.album.images[2].url}
-                    alt=""
-                  />
-                  <p className="artist__track-name">{track.name}</p>
-                  <p className="artist__track-album">{track.album.name}</p>
-                  <p className="artist__track-duration">
-                    {formatDuration(track.duration_ms)}
-                  </p>
-                  <button className="artist__track-button artist__button--add-track">
-                    <b>
-                      {" "}
-                      <svg width="30" height="30" fill={"#fffffff8"}>
-                        <use href={Svg + `#format_list`}></use>
-                      </svg>
-                    </b>
-                  </button>
-                </div>
-              </li>
-            ))}
+            {artistTracksPrevUrl &&
+              artistTracksPrevUrl.map((track) => (
+                <li className="artist__track-item" key={track.id}>
+                  <div className="artist__track">
+                    <img
+                      onClick={() =>
+                        trackToggle(
+                          (trackUrl = track.preview_url),
+                          (trackId = track.id),
+                          currentPlayingTrack,
+                          isPlaying,
+                          dispatch,
+                          playStates,
+                          setPlayStates
+                        )
+                      }
+                      className="artist__track-images"
+                      src={track.album.images[2].url}
+                      alt=""
+                    />
+                    <p className="artist__track-name">{track.name}</p>
+                    <p className="artist__track-album">{track.album.name}</p>
+                    <p className="artist__track-duration">
+                      {formatDuration(track.duration_ms)}
+                    </p>
+                    <button className="artist__track-button artist__button--add-track">
+                      <b>
+                        {" "}
+                        <svg width="30" height="30" fill={"#fffffff8"}>
+                          <use href={Svg + `#format_list`}></use>
+                        </svg>
+                      </b>
+                    </button>
+                  </div>
+                </li>
+              ))}
           </ul>
         </div>
       </div>

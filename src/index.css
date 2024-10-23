@@ -268,7 +268,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(45, 46, 46, 0.832);
+  background: #181717;
   backdrop-filter: blur(25px);
   z-index: 1; /* Зробити псевдоелемент поверх фонового зображення */
 }
