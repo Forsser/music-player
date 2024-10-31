@@ -5,3 +5,9 @@ export const SVGComponent = ({ icon }) => (
     <use href={ComplexitySvg + `#${icon}`}></use>
   </svg>
 );
+
+export const SVGComponentMain = ({ icon }) => (
+  <svg className="svgMain" width="40" height="40" fill={"#fffffff8"}>
+    <use href={ComplexitySvg + `#${icon}`}></use>
+  </svg>
+);

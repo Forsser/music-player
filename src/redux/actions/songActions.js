@@ -1,5 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { fetcSong, fetcSongById } from "./allMusicAPI";
+import {
+  fetcSong,
+  fetcSongById,
+  fetcPlaylistsByCategories,
+} from "./allMusicAPI";
 
 const getSongs = createAsyncThunk(
   "song/getSong",
@@ -25,4 +29,15 @@ const getSongById = createAsyncThunk(
   }
 );
 
-export { getSongs, getSongById };
+const getPlaylistByCategories = createAsyncThunk(
+  "song/getPlaylistByCategories",
+
+  async (categoriesId) => {
+    console.log(categoriesId);
+    const response = await fetcPlaylistsByCategories(categoriesId);
+
+    return response;
+  }
+);
+
+export { getSongs, getSongById, getPlaylistByCategories };

@@ -37,10 +37,19 @@ const fetchArtistById = async (id) => {
 
   return data;
 };
+
+const fetcPlaylistsByCategories = async (categoriesId) => {
+  const { data } = await axios.get(
+    `http://localhost:3030/api/song/categories/${categoriesId}`
+  );
+
+  return data;
+};
 export {
   fetchGeneralPage,
   fetcSong,
   fetcSongById,
   fetchArtist,
   fetchArtistById,
+  fetcPlaylistsByCategories,
 };

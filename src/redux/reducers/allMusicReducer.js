@@ -3,7 +3,11 @@ import {
   getSongsfromGeneralPage,
   playTrack,
 } from "../actions/allMusicActions.js";
-import { getSongs, getSongById } from "../actions/songActions.js";
+import {
+  getSongs,
+  getSongById,
+  getPlaylistByCategories,
+} from "../actions/songActions.js";
 import { getArtistById } from "../actions/artistsActions.js";
 
 const generalInitialState = {
@@ -22,6 +26,7 @@ const artistInitialState = {
   artists: [],
   artistById: {},
 };
+
 const setToken = createReducer([], (builder) => {
   builder.addCase(getSongsfromGeneralPage.fulfilled, (state, action) => {
     return action.payload.token;
@@ -47,7 +52,11 @@ const artist = createReducer(artistInitialState, (builder) => {
   });
 });
 
-const albums = createReducer([], (builder) => {});
+const playlistsByCategories = createReducer([], (builder) => {
+  builder.addCase(getPlaylistByCategories.fulfilled, (state, action) => {
+    return action.payload.playlistBySongsCategories;
+  });
+});
 const podcast = createReducer([], (builder) => {});
 
 const currentTrack = createReducer({}, (builder) => {
@@ -64,7 +73,7 @@ export const allMusicReducer = combineReducers({
   generalPages: generalPages,
   song: songs,
   artist: artist,
-  albums: albums,
+  playlistsByCategories: playlistsByCategories,
   podcast: podcast,
   token: setToken,
   currentTrack: currentTrack,

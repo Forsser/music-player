@@ -1,8 +1,11 @@
-import React, { memo, useEffect, useMemo } from "react";
+import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import "../../styles/song.scss";
-import { getSongs } from "../../redux/actions/songActions.js";
+import {
+  getSongs,
+  getPlaylistByCategories,
+} from "../../redux/actions/songActions.js";
 
 import { getSongsfromGeneralPage } from "../../redux/actions/allMusicActions.js";
 import { TrackToggle } from "./song-track-toggle.jsx";
@@ -20,7 +23,6 @@ export const Song = memo(() => {
   const songCatigories = useSelector(
     (state) => state.allMusic.song.songsCategories
   );
-  console.log(songCatigories);
 
   const previewTrack = trendingTracks.filter((track) => {
     return track.track.preview_url !== null;
@@ -96,14 +98,21 @@ export const Song = memo(() => {
             <ul className="categories-list">
               {songCatigories.map((categories) => {
                 return (
-                  <li className="categories-item" key={categories.id}>
+                  <Link
+                    to={"/playlist"}
+                    className="categories-item"
+                    key={categories.id}
+                    onClick={() =>
+                      dispatch(getPlaylistByCategories(categories.id))
+                    }
+                  >
                     <img
                       width={150}
                       src={categories.icons[0].url}
                       alt="Song Categories"
                     />
                     <p>{categories.name}</p>
-                  </li>
+                  </Link>
                 );
               })}
             </ul>

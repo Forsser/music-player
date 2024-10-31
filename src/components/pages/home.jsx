@@ -9,6 +9,8 @@ import {
 import { Link } from "react-router-dom";
 import { trackToggle } from "../../services/trackToggle.js";
 import { TopSongGlobal } from "../sections/top-song-global.jsx";
+import { TrackCard } from "../sections/track-card.jsx";
+import { SVGComponentMain } from "../svgComponents.jsx";
 
 const maxLengthArtist = 20; // Вкажи максимальну довжину тексту для імені виконавця
 const maxLengthTrack = 20; // Вкажи максимальну довжину тексту для назви треку
@@ -48,9 +50,6 @@ export const Home = () => {
     return `${minutes}:${seconds}`;
   };
 
-  const handleArtist = (artistId) => {
-    return artistId;
-  };
   useEffect(() => {
     dispatch(getSongsfromGeneralPage());
   }, [dispatch]);
@@ -62,47 +61,21 @@ export const Home = () => {
           <h2>Trending songs this week</h2>
           <Link to="/song">See all</Link>
         </div>
-        <div className="section-content">
+        <ul className="section-content">
           {trendingTracks.slice(0, 4).map(({ track }) => {
             return (
-              <article
+              <TrackCard
                 key={track.id}
-                className="card"
-                onClick={() =>
-                  trackToggle(
-                    (trackUrl = track.preview_url),
-                    (trackId = track.id),
-                    currentPlayingTrack,
-                    isPlaying,
-                    dispatch
-                  )
-                }
-              >
-                <img
-                  className="card__img"
-                  src={track.album.images[1].url}
-                  alt="song"
-                />
-                <div className="card__text">
-                  <p className="card__text__name">{track.name}</p>
-                  <div className="card__text__item">
-                    <Link
-                      to={`/artist/${track.artists[0].id}`}
-                      className="card__text--hover"
-                    >
-                      {track.artists[0].name}
-                    </Link>
-                    <p>{formatDuration(track.duration_ms)}</p>
-                  </div>
-                </div>
-                <button
-                  className="card__button"
-                  onClick={handleArtist()}
-                ></button>
-              </article>
+                track={track}
+                currentPlayingTrack={currentPlayingTrack}
+                isPlaying={isPlaying}
+                dispatch={dispatch}
+                trackToggle={trackToggle}
+                formatDuration={formatDuration}
+              />
             );
           })}
-        </div>
+        </ul>
       </section>
       <section className="section">
         <div className="section-title">
