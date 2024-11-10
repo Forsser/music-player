@@ -9,6 +9,8 @@ import { Podcast } from "./podcast";
 import { Song } from "./song";
 import { ArtistById } from "./artist-by-id";
 import { Playlist } from "./playlist";
+import { TopSongGlobal } from "../sections/top-song-global";
+import { TracksByPlaylist } from "../pages/tracks-by-playlist";
 
 export const MainPage = () => {
   return (
@@ -20,6 +22,10 @@ export const MainPage = () => {
           <Route path="/song" element={<Song />} />
           <Route path="/artist/:id" element={<ArtistById />} />
           <Route path="/playlist" element={<Playlist />} />
+          <Route
+            path="/tracks-by-playlist/:playlistId"
+            element={<TracksByPlaylist />}
+          />
           <Route path="/podcast" element={<Podcast />} />
         </Routes>
         <SecondAside />

@@ -1,22 +1,33 @@
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { trackToggle } from "../../services/trackToggle.js";
-import { getTopSongGlobalByPages } from "../../redux/actions/songActions.js";
+import { getTracksByPlaylist } from "../../redux/actions/songActions.js";
 import { SVGComponentMain } from "../svgComponents.jsx";
-import { TrackCard } from "./track-card.jsx";
+import { TrackCard } from "../sections/track-card.jsx";
 
-export const TopSongGlobal = ({ topSongGlobal }) => {
+export const TracksByPlaylist = () => {
+  const { playlistId } = useParams();
+  console.log(playlistId);
+
   const maxLengthArtist = 20; // Вкажи максимальну довжину тексту для імені виконавця
   const maxLengthTrack = 20; // Вкажи максимальну довжину тексту для назви треку
-  let trackUrl = null;
-  let trackId = null;
+
   const dispatch = useDispatch();
+  useEffect(() => {
+    if (playlistId) {
+      dispatch(getTracksByPlaylist(playlistId)); // Робимо запит на сервер з ID плейлиста
+    }
+  }, [playlistId, dispatch]);
 
   const currentPlayingTrack = useSelector(
     (state) => state.allMusic.currentTrack.trackUrl
   );
   const isPlaying = useSelector((state) => state.togglePlay);
+
+  const trackList = useSelector((state) => state.allMusic.tracksByPlaylist);
+  console.log(trackList);
 
   function truncateText(text, maxLength) {
     if (text.length > maxLength) {
@@ -27,7 +38,7 @@ export const TopSongGlobal = ({ topSongGlobal }) => {
 
   const [topSongGlobalPage, setTopSongGlobalPage] = useState(0);
 
-  const handlePageIncrement = () => {
+  /*   const handlePageIncrement = () => {
     setTopSongGlobalPage((prevPage) => prevPage + 1);
     console.log(topSongGlobalPage);
 
@@ -36,7 +47,7 @@ export const TopSongGlobal = ({ topSongGlobal }) => {
 
   const handlePageDecrement = () => {
     setTopSongGlobalPage((prevPage) => (prevPage > 0 ? prevPage - 1 : 0));
-  };
+  }; */
 
   const formatDuration = (durationMs) => {
     const minutes = Math.floor(durationMs / 60000);
@@ -47,14 +58,13 @@ export const TopSongGlobal = ({ topSongGlobal }) => {
   };
 
   return (
-    <section className="section">
+    <section className="section-continer">
       <div className="section-title">
-        <h2>Top Song Global</h2>
-        <a href="#">See all</a>
+        <Link to={"/playlist"}>Back</Link>
       </div>
       <div className="track-list">
         <ul className="track-list__items">
-          {topSongGlobal.map(({ track }) => {
+          {trackList.map(({ track }) => {
             const artistName = truncateText(
               track.artists[0].name,
               maxLengthArtist
@@ -74,59 +84,10 @@ export const TopSongGlobal = ({ topSongGlobal }) => {
           })}
         </ul>
 
-        <button onClick={handlePageDecrement}>back...</button>
+        {/*         <button onClick={handlePageDecrement}>back...</button>
         <button onClick={handlePageIncrement}>Add more...</button>
-        <p>Current Page: {topSongGlobalPage}</p>
+        <p>Current Page: {topSongGlobalPage}</p> */}
       </div>
     </section>
   );
 };
-
-/*  <ul className="track-list__items">
-          {topSongGlobal.map(({ track }) => {
-            const artistName = truncateText(
-              track.artists[0].name,
-              maxLengthArtist
-            );
-            const trackName = truncateText(track.name, maxLengthTrack);
-            return (
-              <li
-                key={track.id}
-                className="track-list__item"
-                onClick={() =>
-                  trackToggle(
-                    (trackUrl = track.preview_url),
-                    (trackId = track.id),
-                    currentPlayingTrack,
-                    isPlaying,
-                    dispatch
-                  )
-                }
-              >
-                <img
-                  src={track.album.images[1].url}
-                  className="track__image"
-                  alt="Album cover"
-                />
-                <div className="track__info">
-                  <p className="track__name">{trackName}</p>
-                  <Link
-                    className="track__artist"
-                    to={`/artist/${track.artists[0].id}`}
-                  >
-                    <p>{artistName}</p>
-                  </Link>
-                </div>
-                <SVGComponentMain
-                  icon={
-                    currentPlayingTrack === track.preview_url
-                      ? isPlaying
-                        ? "pause"
-                        : "play"
-                      : "play"
-                  }
-                />
-              </li>
-            );
-          })}
-        </ul> */

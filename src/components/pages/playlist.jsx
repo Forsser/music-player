@@ -1,8 +1,12 @@
 import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+
+import { getTracksByPlaylist } from "../../redux/actions/songActions";
 import "../../styles/playlist.scss";
 
 export const Playlist = () => {
+  const dispatch = useDispatch();
   const playlists = useSelector(
     (state) => state.allMusic.playlistsByCategories
   );
@@ -20,16 +24,18 @@ export const Playlist = () => {
         {playlists ? (
           playlists.map((playlist) => (
             <li className="playlist__item" key={playlist.id}>
-              <img
-                className="playlist__item-image"
-                src={playlist.images[0].url}
-                alt={playlist.name}
-              />
-              <div className="playlist__item-info">
-                <p className="playlist__item-description">
-                  {removeHTMLTags(playlist.description)}
-                </p>
-              </div>
+              <Link to={`/tracks-by-playlist/${playlist.id}`}>
+                <img
+                  className="playlist__item-image"
+                  src={playlist.images[0].url}
+                  alt={playlist.name}
+                />
+                <div className="playlist__item-info">
+                  <p className="playlist__item-description">
+                    {removeHTMLTags(playlist.description)}
+                  </p>
+                </div>
+              </Link>
             </li>
           ))
         ) : (

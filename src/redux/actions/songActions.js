@@ -3,6 +3,8 @@ import {
   fetcSong,
   fetcSongById,
   fetcPlaylistsByCategories,
+  fetchTopSongGlobalByPages,
+  fetchTracksByPlaylist,
 } from "./allMusicAPI";
 
 const getSongs = createAsyncThunk(
@@ -39,5 +41,30 @@ const getPlaylistByCategories = createAsyncThunk(
     return response;
   }
 );
+const getTopSongGlobalByPages = createAsyncThunk(
+  "song/getTopSongGlobalByPages",
 
-export { getSongs, getSongById, getPlaylistByCategories };
+  async (page) => {
+    const response = await fetchTopSongGlobalByPages(page);
+
+    return response;
+  }
+);
+
+const getTracksByPlaylist = createAsyncThunk(
+  "song/getTracksByPlaylist",
+
+  async (playlistId) => {
+    const response = await fetchTracksByPlaylist(playlistId);
+
+    return response;
+  }
+);
+
+export {
+  getSongs,
+  getSongById,
+  getPlaylistByCategories,
+  getTopSongGlobalByPages,
+  getTracksByPlaylist,
+};

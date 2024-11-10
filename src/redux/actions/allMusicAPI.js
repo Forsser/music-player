@@ -10,8 +10,10 @@ const songsIds =
   "7ouMYWpwJ422jRcDASZB7P,4VqPOruhp5EdPBeR92t6lQ,2takcwOaAZWiXQijPHIx7B";
  */
 
-const fetchGeneralPage = async () => {
-  const { data } = await axios.get("http://localhost:3030/api/");
+const fetchGeneralPage = async (page = 4) => {
+  const { data } = await axios.get("http://localhost:3030/api/", {
+    params: { page },
+  });
   return data;
 };
 const fetcSong = async () => {
@@ -45,6 +47,23 @@ const fetcPlaylistsByCategories = async (categoriesId) => {
 
   return data;
 };
+const fetchTopSongGlobalByPages = async (page) => {
+  const { data } = await axios.get(
+    "http://localhost:3030/api/song/top-song-global",
+    {
+      params: { page },
+    }
+  );
+  return data;
+};
+
+const fetchTracksByPlaylist = async (playlistId) => {
+  const { data } = await axios.get(
+    `http://localhost:3030/api/song/playlist/${playlistId}`
+  );
+
+  return data;
+};
 export {
   fetchGeneralPage,
   fetcSong,
@@ -52,4 +71,6 @@ export {
   fetchArtist,
   fetchArtistById,
   fetcPlaylistsByCategories,
+  fetchTopSongGlobalByPages,
+  fetchTracksByPlaylist,
 };

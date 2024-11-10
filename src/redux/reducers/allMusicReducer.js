@@ -7,6 +7,7 @@ import {
   getSongs,
   getSongById,
   getPlaylistByCategories,
+  getTracksByPlaylist,
 } from "../actions/songActions.js";
 import { getArtistById } from "../actions/artistsActions.js";
 
@@ -57,6 +58,13 @@ const playlistsByCategories = createReducer([], (builder) => {
     return action.payload.playlistBySongsCategories;
   });
 });
+
+const tracksByPlaylist = createReducer([], (builder) => {
+  builder.addCase(getTracksByPlaylist.fulfilled, (state, action) => {
+    return action.payload;
+  });
+});
+
 const podcast = createReducer([], (builder) => {});
 
 const currentTrack = createReducer({}, (builder) => {
@@ -74,6 +82,7 @@ export const allMusicReducer = combineReducers({
   song: songs,
   artist: artist,
   playlistsByCategories: playlistsByCategories,
+  tracksByPlaylist: tracksByPlaylist,
   podcast: podcast,
   token: setToken,
   currentTrack: currentTrack,
