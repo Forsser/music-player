@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import playToggleSvg from "../../styles/svg/play-toggle.svg";
 import { playTrack } from "../../redux/actions/allMusicActions.js";
 import { togglePlay } from "../../redux/actions/togglePlay.js";
+import { SVGComponent, SVGComponentMain } from "../svgComponents.jsx";
 
 const TrackToggle = ({ track }) => {
   const dispatch = useDispatch();
@@ -45,15 +46,15 @@ const TrackToggle = ({ track }) => {
             })
           }
         >
-          <svg width="25" height="25" className="song-play-toggle__svg">
-            <use
-              href={
-                currentPlayingTrack === track.preview_url
-                  ? playToggleSvg + (playStates ? "#pause" : "#play")
-                  : playToggleSvg + "#play"
-              }
-            ></use>
-          </svg>
+          <SVGComponentMain
+            icon={
+              currentPlayingTrack === track.preview_url
+                ? isPlaying
+                  ? "pause"
+                  : "play"
+                : "play"
+            }
+          />
         </button>
       </div>
       <p className="trending-songs__name">{track.name}</p>

@@ -59,6 +59,12 @@
       }
       &:hover {
         background-color: #e3dede31;
+        .svgSong {
+          left: 10%;
+          top: 10%;
+          opacity: 1;
+          transition: all 0.3s ease; // плавність зміни позиції
+        }
         a {
           color: rgb(255, 174, 0);
           text-decoration: underline;
@@ -129,7 +135,7 @@ a {
 .song-play-toggle {
   display: flex;
   width: 100%;
-  height: 100%;
+  height: 50px;
   line-height: 0px;
 
   position: absolute;
@@ -139,12 +145,6 @@ a {
   padding: 0px;
   background: #00000029;
   cursor: pointer;
-  &:hover .song-play-toggle__svg {
-    top: 0px;
-    display: block;
-    opacity: 1;
-    fill: #28eb66;
-  }
 }
 
 //Categories style

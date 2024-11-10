@@ -6,12 +6,15 @@ import {
   getSongs,
   getPlaylistByCategories,
 } from "../../redux/actions/songActions.js";
+import useScrollToAnchor from "../../services/scrollHooks.js";
 
 import { getSongsfromGeneralPage } from "../../redux/actions/allMusicActions.js";
 import { TrackToggle } from "./song-track-toggle.jsx";
+import { SVGComponent } from "../svgComponents.jsx";
 
 export const Song = memo(() => {
   const dispatch = useDispatch();
+  useScrollToAnchor();
   const trendingTracks = useSelector(
     (state) => state.allMusic.generalPages.trendingTracks
   );
@@ -94,7 +97,7 @@ export const Song = memo(() => {
 
         <section>
           <div className="categories-continer">
-            <h2>Song Categories</h2>
+            <h2 id="song-categories">Song Categories</h2>
             <ul className="categories-list">
               {songCatigories.map((categories) => {
                 return (

@@ -21,6 +21,7 @@ export const Playlist = () => {
     <div className="section-continer">
       <h1 className="playlist__title">Playlist</h1>
       <ul className="playlist__list">
+        <Link to={"/song#song-categories"}>Back to playlist</Link>
         {playlists ? (
           playlists.map((playlist) => (
             <li className="playlist__item" key={playlist.id}>
